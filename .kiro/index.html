@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List Life Dashboard</title>
+    <script>
+      (function () {
+        try {
+          var storedTheme = localStorage.getItem('todoLifeDashboard.theme');
+          var theme = storedTheme === 'dark' ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (error) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="greeting-block">
+          <p id="dateLabel" class="date-label">Loading date…</p>
+          <div class="greeting-row">
+            <h1 id="greetingText">Good morning</h1>
+            <span id="timeDisplay" class="time-display">00:00</span>
+          </div>
+        </div>
+
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle color theme">
+          Light mode
+        </button>
+      </header>
+
+      <main class="dashboard">
+        <section class="panel profile-panel">
+          <h2>Profile</h2>
+          <form id="nameForm" class="stacked-form">
+            <label for="nameInput">Your name</label>
+            <div class="inline-form">
+              <input id="nameInput" type="text" maxlength="50" placeholder="Enter your name" />
+              <button type="submit">Save</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="panel timer-panel">
+          <div class="panel-header">
+            <h2>Focus Timer</h2>
+            <span class="timer-tag">25 min</span>
+          </div>
+          <div id="timerDisplay" class="timer-display" aria-live="polite">25:00</div>
+          <div class="timer-controls">
+            <button id="startTimerBtn" type="button">Start</button>
+            <button id="stopTimerBtn" type="button" class="secondary">Stop</button>
+            <button id="resetTimerBtn" type="button" class="ghost">Reset</button>
+          </div>
+          <p id="timerNotification" class="timer-notification" hidden>Session complete. Time to take a break.</p>
+        </section>
+
+        <section class="panel tasks-panel">
+          <div class="panel-header">
+            <h2>Tasks</h2>
+            <label class="sort-wrap" for="taskSort">
+              <span>Sort</span>
+              <select id="taskSort" aria-label="Sort tasks">
+                <option value="default">Default (creation order)</option>
+                <option value="completed-last">Completed last</option>
+                <option value="alphabetical">Alphabetical (A–Z)</option>
+              </select>
+            </label>
+          </div>
+
+          <form id="taskForm" class="stacked-form">
+            <label for="taskInput">Add task</label>
+            <div class="inline-form full-width">
+              <input id="taskInput" type="text" maxlength="200" placeholder="Add a to-do" />
+              <button type="submit">Add</button>
+            </div>
+          </form>
+
+          <p id="taskValidation" class="validation-message" aria-live="polite" hidden></p>
+          <ul id="taskList" class="task-list" aria-live="polite"></ul>
+        </section>
+
+        <section class="panel links-panel">
+          <h2>Quick Links</h2>
+          <form id="linkForm" class="stacked-form">
+            <label for="linkLabelInput">Label</label>
+            <input id="linkLabelInput" type="text" maxlength="50" placeholder="e.g. Gmail" />
+
+            <label for="linkUrlInput">URL</label>
+            <div class="inline-form full-width">
+              <input id="linkUrlInput" type="url" placeholder="https://example.com" />
+              <button type="submit">Add</button>
+            </div>
+          </form>
+
+          <p id="linkValidation" class="validation-message" aria-live="polite" hidden></p>
+          <div id="quickLinks" class="link-list" aria-live="polite"></div>
+        </section>
+      </main>
+    </div>
+
+    <div id="storageNotice" class="storage-notice hidden" role="status" aria-live="polite">
+      <span>Storage is unavailable in this browser session. Your changes will not be saved.</span>
+      <button id="dismissNotice" type="button">Dismiss</button>
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

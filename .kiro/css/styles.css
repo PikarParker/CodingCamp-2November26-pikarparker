@@ -1,0 +1,477 @@
+:root {
+  --bg: #f3f6fb;
+  --bg-soft: #eef3ff;
+  --panel: rgba(255, 255, 255, 0.9);
+  --panel-border: rgba(148, 163, 184, 0.25);
+  --text: #10233c;
+  --muted: #53657d;
+  --primary: #2d6cdf;
+  --primary-strong: #1f52b7;
+  --accent: #dbeafe;
+  --danger: #d62d4a;
+  --danger-soft: #ffe2e8;
+  --success: #18875c;
+  --success-soft: #dff8ef;
+  --shadow: 0 18px 42px rgba(15, 23, 42, 0.08);
+  --focus: #ffc857;
+  --input-bg: #ffffff;
+  --button-text: #ffffff;
+  --warning-bg: rgba(251, 191, 36, 0.16);
+  --warning-text: #7a4e00;
+  --link-text: #143d8a;
+}
+
+:root[data-theme='dark'] {
+  --bg: #0f172a;
+  --bg-soft: #111827;
+  --panel: rgba(17, 24, 39, 0.9);
+  --panel-border: rgba(148, 163, 184, 0.2);
+  --text: #e5eefb;
+  --muted: #b7c5d9;
+  --primary: #7ab4ff;
+  --primary-strong: #9dc0ff;
+  --accent: rgba(96, 165, 250, 0.2);
+  --danger: #ff7c99;
+  --danger-soft: rgba(127, 29, 29, 0.35);
+  --success: #6ee7b7;
+  --success-soft: rgba(5, 150, 105, 0.2);
+  --shadow: 0 20px 45px rgba(2, 6, 23, 0.45);
+  --focus: #ffd166;
+  --input-bg: #111827;
+  --button-text: #0f172a;
+  --warning-bg: rgba(251, 191, 36, 0.12);
+  --warning-text: #f7d98d;
+  --link-text: #b8d7ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(160deg, var(--bg), var(--bg-soft));
+  color: var(--text);
+  min-height: 100vh;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button,
+input,
+select {
+  transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.app-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+}
+
+.topbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.greeting-block {
+  flex: 1;
+}
+
+.date-label {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.greeting-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 15px;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 0;
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  line-height: 1.1;
+}
+
+h2 {
+  margin-bottom: 16px;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+}
+
+.time-display {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--text);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.theme-toggle {
+  border: 1px solid var(--panel-border);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  padding: 12px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  padding: 22px 20px;
+  backdrop-filter: blur(10px);
+}
+
+.profile-panel,
+.links-panel {
+  grid-column: span 12;
+}
+
+.timer-panel {
+  grid-column: span 5;
+}
+
+.tasks-panel {
+  grid-column: span 7;
+}
+
+.profile-panel,
+.timer-panel,
+.tasks-panel,
+.links-panel {
+  min-width: 0;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.timer-tag {
+  background: var(--accent);
+  color: var(--primary-strong);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 6px 10px;
+}
+
+.stacked-form,
+.sort-wrap {
+  display: grid;
+  gap: 8px;
+}
+
+.inline-form {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.full-width {
+  width: 100%;
+}
+
+label {
+  font-weight: 600;
+  color: var(--muted);
+}
+
+input,
+select {
+  width: 100%;
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  background: var(--input-bg);
+  color: var(--text);
+  padding: 12px 14px;
+}
+
+input::placeholder {
+  color: var(--muted);
+}
+
+button {
+  border: none;
+  border-radius: 12px;
+  background: var(--primary);
+  color: var(--button-text);
+  cursor: pointer;
+  padding: 12px 16px;
+  font-weight: 700;
+}
+
+button.secondary {
+  background: var(--accent);
+  color: var(--text);
+}
+
+button.ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--panel-border);
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  opacity: 0.52;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.timer-display {
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-align: center;
+  margin: 12px 0 18px;
+}
+
+.timer-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.timer-controls button {
+  flex: 1 1 110px;
+}
+
+.timer-notification {
+  margin-top: 18px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--warning-bg);
+  color: var(--warning-text);
+  font-weight: 600;
+}
+
+.sort-wrap {
+  min-width: 200px;
+  margin-left: auto;
+}
+
+.validation-message {
+  margin: 12px 0 0;
+  font-size: 0.92rem;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.task-list,
+.link-list {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+  display: grid;
+  gap: 10px;
+}
+
+.task-item,
+.link-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  background: rgba(99, 102, 241, 0.02);
+}
+
+.task-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.task-toggle {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--success);
+}
+
+.task-text {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.task-text.completed {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.task-actions,
+.link-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.task-actions button,
+.link-actions button {
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+}
+
+.task-actions .edit-btn {
+  background: var(--accent);
+  color: var(--text);
+}
+
+.task-actions .delete-btn,
+.link-actions .delete-btn {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.task-edit-input {
+  flex: 1;
+  min-width: 0;
+}
+
+.task-edit-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.link-button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  background: var(--accent);
+  color: var(--link-text);
+  text-decoration: none;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.storage-notice {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  max-width: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 14px 16px;
+  z-index: 999;
+}
+
+.storage-notice.hidden {
+  display: none;
+}
+
+.storage-notice button {
+  background: var(--primary);
+  color: var(--button-text);
+  padding: 8px 10px;
+}
+
+@media (max-width: 767px) {
+  .app-shell {
+    padding: 18px 14px 42px;
+  }
+
+  .topbar,
+  .inline-form,
+  .panel-header,
+  .task-item,
+  .link-item,
+  .task-main,
+  .task-edit-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-panel,
+  .timer-panel,
+  .tasks-panel,
+  .links-panel {
+    grid-column: auto;
+  }
+
+  .sort-wrap {
+    margin-left: 0;
+    min-width: 0;
+  }
+
+  .task-actions,
+  .link-actions {
+    margin-left: 0;
+    justify-content: flex-end;
+  }
+
+  .storage-notice {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    max-width: none;
+  }
+}
